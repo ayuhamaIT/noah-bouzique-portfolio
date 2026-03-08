@@ -37,7 +37,7 @@ const App = () => (
       <div style={{ paddingTop: "1rem" }}>
         <TechStack />
       </div>
-      <div style={{ paddingTop: "1rem" }}>
+      <div style={{ paddingTop: "3rem" }}>
         <FeatureCards />
       </div>
       <div style={{ paddingTop: "1rem" }}>
@@ -46,9 +46,9 @@ const App = () => (
       <div style={{ paddingTop: "1rem" }}>
         <Experience />
       </div>
-      <div style={{ paddingTop: "1rem" }}>
+      {/*<div style={{ paddingTop: "1rem" }}>
         <Contact />
-      </div>
+      </div>*/}
       <Footer />
     </div>
   </>

@@ -3,7 +3,8 @@ import gsap from "gsap";
 
 import TitleHeader from "../components/TitleHeader";
 import TechIconCardExperience from "../components/models/tech_logos/TechIconCardExperience";
-import { techStackIcons } from "../constants";
+import { techStackIcons as defaultTechStackIcons } from "../constants";
+import { useTranslation } from "../hooks/useTranslation";
 
 const TechStack = () => {
   useGSAP(() => {
@@ -31,25 +32,56 @@ const TechStack = () => {
     <div id="skills" className="flex-center section-padding">
       <div className="w-full h-full md:px-10 px-5">
         <TitleHeader
-          title="Mes principales compétences"
+          title={(() => {
+            try {
+              const { t } = useTranslation();
+              return t('techTitle') || 'Skills';
+            } catch (e) {
+              return 'Skills';
+            }
+          })()}
         />
+        
         <div className="tech-grid">
-          {techStackIcons.map((techStackIcon) => (
-            <div
-              key={techStackIcon.name}
-              className="card-border tech-card overflow-hidden group xl:rounded-full rounded-2xl"
-            >
-              <div className="tech-card-animated-bg" />
-              <div className="tech-card-content">
-                <div className="tech-icon-wrapper">
-                  <TechIconCardExperience model={techStackIcon} />
+          {(() => {
+            try {
+              const { t } = useTranslation();
+              const translatedNames = t('techStackImgs') || [];
+              return defaultTechStackIcons.map((techStackIcon, idx) => (
+                <div
+                  key={techStackIcon.modelPath}
+                  className="card-border tech-card overflow-hidden group xl:rounded-full rounded-2xl"
+                >
+                  <div className="tech-card-animated-bg" />
+                  <div className="tech-card-content">
+                    <div className="tech-icon-wrapper">
+                      <TechIconCardExperience model={techStackIcon} />
+                    </div>
+                    <div className="padding-x w-full">
+                      <p>{(translatedNames[idx] && translatedNames[idx].name) || techStackIcon.name}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="padding-x w-full">
-                  <p>{techStackIcon.name}</p>
+              ));
+            } catch (e) {
+              return defaultTechStackIcons.map((techStackIcon) => (
+                <div
+                  key={techStackIcon.modelPath}
+                  className="card-border tech-card overflow-hidden group xl:rounded-full rounded-2xl"
+                >
+                  <div className="tech-card-animated-bg" />
+                  <div className="tech-card-content">
+                    <div className="tech-icon-wrapper">
+                      <TechIconCardExperience model={techStackIcon} />
+                    </div>
+                    <div className="padding-x w-full">
+                      <p>{techStackIcon.name}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ));
+            }
+          })()}
         </div>
       </div>
     </div>

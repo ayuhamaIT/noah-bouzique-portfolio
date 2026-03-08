@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const PhoneModel = ({ mouseX, mouseY }) => {
   const group = useRef();
-  const { scene } = useGLTF("/models/old_phone.glb");
+  const { scene } = useGLTF("models/old_phone.glb");
 
   useFrame(() => {
     if (group.current) {

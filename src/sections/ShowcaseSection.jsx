@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import TitleHeader from "../components/TitleHeader";
+import { useTranslation } from "../hooks/useTranslation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,24 +47,26 @@ const AppShowcase = () => {
     });
   }, []);
 
+  const { t } = useTranslation();
+  const showcase = t('showcase') || { title: 'Some projects', projects: [] };
+
   return (
     <div id="work" ref={sectionRef} className="app-showcase">
-      
       <div className="w-full">
         <TitleHeader
-          title="Quelques réalisations"
+          title={showcase.title}
         />
         <div style={{ marginTop: "2rem" }} className="showcaselayout">
           <div ref={batimenRef} className="first-project-wrapper">
             <div className="image-wrapper">
-              <img src="/images/JBinfo.jpg"/>
+              <img src="images/JBinfo.jpg" alt={showcase.projects[0]?.imgAlt || 'JBinfo'} />
             </div>
             <div className="text-content">
               <h2>
-                Developpement du site pour l'entreprise JBinfo
+                {showcase.projects[0]?.title || 'Developpement du site pour l\'entreprise JBinfo'}
               </h2>
               <p className="text-white-50 md:text-xl">
-                Ma première expérience dans le monde professionnel a été la création du site web pour JBinfo, une entreprise locale de services informatiques.
+                {showcase.projects[0]?.desc || 'Ma première expérience dans le monde professionnel a été la création du site web pour JBinfo, une entreprise locale de services informatiques.'}
               </p>
             </div>
           </div>
@@ -72,18 +75,18 @@ const AppShowcase = () => {
             <div className="project" ref={libraryRef}>
               <div className="image-wrapper bg-[#040E21]">
                 <img
-                  src="/images/project2.png"
-                  alt="Notre projet Dandata, plateforme de création d'articles"
+                  src="images/project2.png"
+                  alt={showcase.projects[1]?.imgAlt || 'Dandata project'}
                 />
               </div>
-              <h2>Notre projet Dandata, plateforme de création d'articles</h2>
+              <h2>{showcase.projects[1]?.title || 'Notre projet Dandata, plateforme de création d\'articles'}</h2>
             </div>
 
             <div className="project" ref={ycDirectoryRef}>
               <div className="image-wrapper bg-[#040E21]">
-                <video src="/videos/batimen.mp4" controls autoPlay muted loop />
+                <video src="videos/batimen.mp4" controls autoPlay muted loop />
               </div>
-              <h2>Création d'une publicité pour l'entreprise fictive Batimen</h2>
+              <h2>{showcase.projects[2]?.title || 'Création d\'une publicité pour l\'entreprise fictive Batimen'}</h2>
             </div>
           </div>
         </div>

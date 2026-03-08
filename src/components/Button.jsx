@@ -10,9 +10,8 @@ const Button = ({ text, className, id, downloadCv = false }) => {
     e.preventDefault();
 
     if (downloadCv) {
-      // Download CV
       const link = document.createElement("a");
-      link.href = "/cv.pdf";
+      link.href = "docs/cv.pdf";
       link.download = "CV_Noah_Bouzique.pdf";
       document.body.appendChild(link);
       link.click();
@@ -41,7 +40,7 @@ const Button = ({ text, className, id, downloadCv = false }) => {
         <div className="bg-circle">
           {downloadCv && (
             <img 
-              src="/images/download.png" 
+              src="images/download.png" 
               alt="download" 
               className="w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             />

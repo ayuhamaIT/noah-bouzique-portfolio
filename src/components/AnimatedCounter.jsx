@@ -2,14 +2,15 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-
-import { counterItems } from "../constants";
+import { useTranslation } from "../hooks/useTranslation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AnimatedCounter = () => {
   const counterRef = useRef(null);
   const countersRef = useRef([]);
+  const { t } = useTranslation();
+  const counterItems = t('counterItems') || [];
 
   useGSAP(() => {
     countersRef.current.forEach((counter, index) => {

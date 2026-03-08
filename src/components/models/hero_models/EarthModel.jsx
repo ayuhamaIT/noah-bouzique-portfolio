@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function EarthModel(props) {
-  const { nodes, materials } = useGLTF("/models/earth.glb");
+  const { nodes, materials } = useGLTF("models/earth.glb");
 
   return (
     <group {...props} dispose={null}>
@@ -29,4 +29,4 @@ export function EarthModel(props) {
   );
 }
 
-useGLTF.preload("/models/earth.glb");
+useGLTF.preload("models/earth.glb");

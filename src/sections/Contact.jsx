@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import TitleHeader from "../components/TitleHeader";
+import { useTranslation } from "../hooks/useTranslation";
 import OldPhoneModel from "../components/models/OldPhoneModel";
 
 const Contact = () => {
@@ -38,11 +39,22 @@ const Contact = () => {
     }
   };
 
+  const { t } = useTranslation();
+  const contactTitle = t('contactTitle') || "Vous voulez me contacter? Le formulaire est là pour ça!";
+  const labelName = t('contact.labelName') || 'Votre prénom';
+  const placeholderName = t('contact.placeholderName') || "N'hésitez pas à partager votre super prénom";
+  const labelEmail = t('contact.labelEmail') || 'Votre Email';
+  const placeholderEmail = t('contact.placeholderEmail') || 'Quelle est votre adresse email?';
+  const labelMessage = t('contact.labelMessage') || 'Votre Message';
+  const placeholderMessage = t('contact.placeholderMessage') || 'Comment puis-je vous aider?';
+  const sendingText = t('contact.sending') || 'Envoi en cours...';
+  const sendText = t('contact.send') || 'Envoyer le message';
+
   return (
     <section id="contact" className="flex-center section-padding">
       <div className="w-full h-full md:px-10 px-5">
         <TitleHeader
-          title="Vous voulez me contacter? Le formulaire est là pour ça!"
+          title={contactTitle}
         />
         <div className="grid-12-cols mt-16">
           <div className="xl:col-span-7 min-h-96">
@@ -58,39 +70,39 @@ const Contact = () => {
                 className="w-full flex flex-col gap-7"
               >
                 <div>
-                  <label htmlFor="name">Votre prénom</label>
+                  <label htmlFor="name">{labelName}</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="N'hésitez pas à partager votre super prénom"
+                    placeholder={placeholderName}
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email">Votre Email</label>
+                  <label htmlFor="email">{labelEmail}</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="Quelle est votre adresse email?"
+                    placeholder={placeholderEmail}
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message">Votre Message</label>
+                  <label htmlFor="message">{labelMessage}</label>
                   <textarea
                     id="message"
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="Comment puis-je vous aider?"
+                    placeholder={placeholderMessage}
                     rows="5"
                     required
                   />
@@ -100,13 +112,13 @@ const Contact = () => {
                   <div className="cta-button group">
                     <div className="bg-circle flex items-center justify-center group">
                       <img 
-                        src="/images/mail.png" 
+                        src="images/mail.png" 
                         alt="mail" 
                         className="w-[50%] h-[50%] object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       />
                     </div>
                     <p className="text">
-                      {loading ? "Envoi en cours..." : "Envoyer le message"}
+                      {loading ? sendingText : sendText}
                     </p>
                   </div>
                 </button>

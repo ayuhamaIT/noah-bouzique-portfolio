@@ -4,6 +4,7 @@ import gsap from "gsap";
 import AnimatedCounter from "../components/AnimatedCounter";
 import Button from "../components/Button";
 import HeroExperience from "../components/models/hero_models/HeroExperience";
+import { useTranslation } from "../hooks/useTranslation";
 
 const Hero = () => {
   useGSAP(() => {
@@ -20,21 +21,37 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
-              <h1>
-                Salut!
-              </h1>
-              <h1>Je suis Noah Bouzique</h1>
-              <h1>Etudiant en 3ème Année</h1>
-              <h1>de MMI</h1>
+              {(() => {
+                try {
+                  const { t } = useTranslation();
+                  return (
+                    <>
+                      <h1>{t('hero.line1')}</h1>
+                      <h1>{t('hero.line2')}</h1>
+                      <h1>{t('hero.line3')}</h1>
+                      <h1>{t('hero.line4')}</h1>
+                    </>
+                  );
+                } catch (e) {
+                  return (
+                    <>
+                      <h1>Salut!</h1>
+                      <h1>Je suis Noah Bouzique</h1>
+                      <h1>Etudiant en 3ème Année</h1>
+                      <h1>de MMI</h1>
+                    </>
+                  );
+                }
+              })()}
 
             </div>
 
             <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-              Envie de me connaître un peu plus? Continuez la visite!
+              {(() => { try { const { t } = useTranslation(); return t('hero.paragraph'); } catch(e){ return 'Envie de me connaître un peu plus? Continuez la visite!'; } })()}
             </p>
 
             <Button
-              text="Mon CV"
+              text={(() => { try { const { t } = useTranslation(); return t('hero.cvText'); } catch(e){ return 'Mon CV'; } })()}
               className="md:w-80 md:h-16 w-60 h-12"
               downloadCv={true}
             />
