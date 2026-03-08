@@ -121,6 +121,9 @@ export const translations = {
       sending: "Envoi en cours...",
       send: "Envoyer le message",
     },
+    nav: {
+      contactBtn: "Me contacter",
+    },
     footer: {
       copyright: `© ${new Date().getFullYear()} Bouzique Noah. En cours de développement.`,
     },
@@ -275,6 +278,9 @@ export const translations = {
       placeholderMessage: "How can I help you?",
       sending: "Sending...",
       send: "Send message",
+    },
+    nav: {
+      contactBtn: "Contact me",
     },
     footer: {
       copyright: `© ${new Date().getFullYear()} Noah Bouzique. In development.`,

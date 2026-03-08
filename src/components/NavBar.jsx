@@ -44,15 +44,24 @@ const NavBar = () => {
           </ul>
         </nav>
 
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginLeft: 16, display: 'flex', gap: 12, alignItems: 'center' }}>
           <LanguageSwitcher />
+          {(() => {
+            try {
+              const { t } = useTranslation();
+              const label = t('nav.contactBtn') || 'Me contacter';
+              return (
+                <a href="#contact" className="contact-btn group">
+                  <div className="inner">
+                    <span>{label}</span>
+                  </div>
+                </a>
+              );
+            } catch (e) {
+              return null;
+            }
+          })()}
         </div>
-
-        {/*<a href="#contact" className="contact-btn group">
-          <div className="inner">
-            <span>Me contacter</span>
-          </div>
-        </a>*/}
       </div>
     </header>
   );
